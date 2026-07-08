@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Staffing Solutions - Hire & Get Hired</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+  body{background:#f5f7fa;color:#333}
+  
+  /* Header */
+  header{background:linear-gradient(90deg,#1e3c72,#2a5298);color:white;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000}
+  header h1{font-size:22px}
+  nav button{margin-left:10px;padding:8px 15px;border:none;background:white;color:#1e3c72;border-radius:5px;cursor:pointer;font-weight:600}
+  
+  /* Hero */
+  .hero{background:url('https://images.unsplash.com/photo-1521791136064-7986c2920216') center/cover;color:white;text-align:center;padding:80px 20px}
+  .hero h2{font-size:36px;margin-bottom:10px}
+  .hero p{font-size:18px;margin-bottom:20px}
+  .btn-group button{margin:5px;padding:12px 25px;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-weight:600}
+  .btn-primary{background:#ff6b35;color:white}
+  .btn-secondary{background:white;color:#1e3c72}
+  
+  /* Sections */
+  .container{padding:50px 20px;max-width:1200px;margin:auto}
+  .section-title{text-align:center;font-size:28px;color:#1e3c72;margin-bottom:30px}
+  
+  /* Pricing */
+  .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .plan{border:2px solid #ddd;border-radius:12px;padding:25px;text-align:center;background:white;transition:0.3s}
+  .plan:hover{border-color:#1e3c72;transform:translateY(-5px)}
+  .plan h3{color:#1e3c72;font-size:22px}
+  .plan .price{font-size:32px;color:#ff6b35;margin:15px 0;font-weight:bold}
+  .plan ul{list-style:none;margin:15px 0}
+  .plan ul li{padding:8px 0;border-bottom:1px solid #eee}
+  .plan button{width:100%;padding:12px;background:#1e3c72;color:white;border:none;border-radius:8px;cursor:pointer;font-size:16px}
+  
+  /* Forms */
+  .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:2000}
+  .modal-content{background:white;padding:30px;border-radius:12px;width:90%;max-width:450px}
+  .close{float:right;font-size:24px;cursor:pointer;color:#999}
+  input,select,textarea{width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px}
+  .form-btn{background:#ff6b35;color:white;padding:12px;border:none;border-radius:6px;width:100%;cursor:pointer;font-size:16px}
+  
+  /* Footer */
+  footer{background:#1e3c72;color:white;text-align:center;padding:30px 20px}
+  .social a{margin:0 10px;display:inline-block}
+  .social img{width:35px;height:35px}
+  .whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;border-radius:50%;width:55px;height:55px;display:flex;justify-content:center;align-items:center;z-index:1000}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>💼 Prime Staffing Solutions</h1>
+  <nav>
+    <button onclick="openModal('empLoginModal')">Employee Login</button>
+    <button onclick="openModal('compLoginModal')">Company Login</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Connect Talent with Opportunity</h2>
+  <p>India's Trusted Staffing & Job Platform</p>
+  <div class="btn-group">
+    <button class="btn-primary" onclick="openModal('empRegModal')">I'm Looking for Job</button>
+    <button class="btn-secondary" onclick="openModal('compRegModal')">I'm Hiring</button>
+  </div>
+</section>
+
+<div class="container">
+  <h2 class="section-title">Employee Plan</h2>
+  <div class="pricing">
+    <div class="plan">
+      <h3>Job Seeker</h3>
+      <div class="price">₹99 <span style="font-size:16px">/month</span></div>
+      <ul>
+        <li>Create Profile</li>
+        <li>Upload Resume</li>
+        <li>Apply to Unlimited Jobs</li>
+        <li>Profile Visible to Companies</li>
+      </ul>
+      <button onclick="subscribe('employee',99)">Subscribe Now</button>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="background:#fff">
+  <h2 class="section-title">Company Hiring Plans</h2>
+  <div class="pricing">
+    <div class="plan">
+      <h3>Basic</h3>
+      <div class="price">₹999</div>
+      <ul>
+        <li>View 20 Employee Profiles</li>
+        <li>Post 5 Jobs</li>
+        <li>Email Support</li>
+      </ul>
+      <button onclick="subscribe('company',999)">Buy Basic</button>
+    </div>
+    <div class="plan">
+      <h3>Growth</h3>
+      <div class="price">₹1999</div>
+      <ul>
+        <li>View 50 Employee Profiles</li>
+        <li>Post 15 Jobs</li>
+        <li>Priority Support</li>
+      </ul>
+      <button onclick="subscribe('company',1999)">Buy Growth</button>
+    </div>
+    <div class="plan" style="border-color:#ff6b35">
+      <h3>Pro</h3>
+      <div class="price">₹2999</div>
+      <ul>
+        <li>View 1000 Employee Profiles</li>
+        <li>Post 50 Jobs</li>
+        <li>Dedicated RM</li>
+      </ul>
+      <button onclick="subscribe('company',2999)">Buy Pro</button>
+    </div>
+  </div>
+</div>
+
+<!-- Employee Registration Modal -->
+<div class="modal" id="empRegModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('empRegModal')">&times;</span>
+    <h2>Employee Registration</h2>
+    <input type="text" id="empName" placeholder="Full Name">
+    <input type="email" id="empEmail" placeholder="Email">
+    <input type="tel" id="empPhone" placeholder="Contact Number">
+    <input type="text" id="empQual" placeholder="Qualification">
+    <input type="file" id="empResume">
+    <button class="form-btn" onclick="empRegister()">Register & Pay ₹99</button>
+  </div>
+</div>
+
+<!-- Employee Login Modal -->
+<div class="modal" id="empLoginModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('empLoginModal')">&times;</span>
+    <h2>Employee Login</h2>
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button class="form-btn">Login</button>
+  </div>
+</div>
+
+<!-- Company Registration Modal -->
+<div class="modal" id="compRegModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('compRegModal')">&times;</span>
+    <h2>Company Owner Registration</h2>
+    <input type="text" placeholder="Company Name">
+    <input type="text" placeholder="GST Number">
+    <input type="text" placeholder="Owner Name">
+    <input type="email" placeholder="Company Email">
+    <input type="tel" placeholder="Contact Number">
+    <button class="form-btn" onclick="openModal('planModal')">Register & Choose Plan</button>
+  </div>
+</div>
+
+<!-- Company Login Modal -->
+<div class="modal" id="compLoginModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('compLoginModal')">&times;</span>
+    <h2>Company Login</h2>
+    <input type="email" placeholder="Company Email">
+    <input type="password" placeholder="Password">
+    <button class="form-btn">Login</button>
+  </div>
+</div>
+
+<!-- Plan Selection Modal -->
+<div class="modal" id="planModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('planModal')">&times;</span>
+    <h2>Select Subscription Plan</h2>
+    <button class="form-btn" onclick="subscribe('company',999)">Basic - ₹999</button><br><br>
+    <button class="form-btn" onclick="subscribe('company',1999)">Growth - ₹1999</button><br><br>
+    <button class="form-btn" onclick="subscribe('company',2999)">Pro - ₹2999</button>
+  </div>
+</div>
+
+<!-- WhatsApp Button -->
+<a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="whatsapp">
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="30">
+</a>
+
+<footer>
+  <p>© 2026 Prime Staffing Solutions. All Rights Reserved.</p>
+  <div class="social" style="margin-top:15px">
+    <a href="https://instagram.com" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
+    <a href="https://facebook.com" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
+    <a href="https://wa.me/91XXXXXXXXXX" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
+  </div>
+</footer>
+
+<script>
+function openModal(id){document.getElementById(id).style.display="flex"}
+function closeModal(id){document.getElementById(id).style.display="none"}
+
+function subscribe(type, amount){
+  var options = {
+    "key": "rzp_test_123456789", // Replace with your Razorpay Key
+    "amount": amount*100, 
+    "currency": "INR",
+    "name": "Prime Staffing Solutions",
+    "description": type=="employee" ? "Employee Subscription" : "Company Subscription",
+    "handler": function (response){
+        alert("Payment Successful! ID: "+response.razorpay_payment_id);
+        // Here you can save user data to backend
+    },
+    "prefill": {"name":"","email":"","contact":""}
+  };
+  var rzp = new Razorpay(options);
+  rzp.open();
+}
+
+function empRegister(){
+  if(!document.getElementById('empName').value){alert("Please fill all details");return;}
+  subscribe('employee',99);
+}
+</script>
+
+</body>
+</html>
